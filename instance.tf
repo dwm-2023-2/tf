@@ -6,6 +6,13 @@ resource "aws_network_interface" "dwm-network" {
   }
 }
 
+resource "aws_volume_attachment" "ebs-volume" {
+  device_name = "/dev/sdh"
+  volume_id   = aws_ebs_volume.ebs-dwm.id
+  instance_id = aws_instance.dwm-instance.id
+}
+
+
 resource "aws_instance" "dwm-instance" {
   ami           = "ami-06db4d78cb1d3bbf9"
   instance_type = "t2.medium"
